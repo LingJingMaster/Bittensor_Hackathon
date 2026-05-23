@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshBench Demo</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header>
+    <h1>FreshBench</h1>
+    <p class="subtitle">AI Benchmark Freshness Subnet</p>
+  </header>
+
+  <main>
+    <section class="control-panel">
+      <h2>Select Sample Asset</h2>
+      <div id="sample-buttons" class="sample-buttons">
+        <button class="sample-btn" data-sample="good" disabled>Loading...</button>
+      </div>
+      <button id="validate-btn" class="validate-btn" disabled>Validate Asset</button>
+    </section>
+
+    <section id="submission-preview" class="card hidden">
+      <h2>Miner Submission</h2>
+      <pre id="submission-json"></pre>
+    </section>
+
+    <section id="results" class="hidden">
+      <div class="result-header">
+        <div id="final-score" class="score-display"></div>
+        <div id="asset-state" class="state-badge"></div>
+      </div>
+
+      <section class="card">
+        <h2>Validation Pipeline</h2>
+        <div id="stages"></div>
+      </section>
+
+      <section class="card">
+        <h2>Reward Hint</h2>
+        <div id="reward-hint"></div>
+      </section>
+
+      <section class="card">
+        <h2>Full Report</h2>
+        <details>
+          <summary>View JSON</summary>
+          <pre id="report-json"></pre>
+        </details>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <p>FreshBench &mdash; Bittensor Subnet Hackathon 2026</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -56,12 +56,12 @@ def test_demo_samples_endpoint_lists_assets(client: TestClient):
 
     assert response.status_code == 200
     payload = response.json()
-    task_ids = {sample["task_id"] for sample in payload}
-    assert task_ids == {
-        "sample_bad_ambiguous_001",
-        "sample_good_grant_letter_001",
-        "sample_near_duplicate_invoice_001",
-    }
+    names = {sample["name"] for sample in payload}
+    assert names == {"bad_ambiguous", "good_document", "near_duplicate"}
+    for sample in payload:
+        assert "label" in sample
+        assert "submission" in sample
+        assert sample["submission"]["task_id"]
 
 
 def test_validate_asset_returns_report_and_saves_it(client: TestClient):

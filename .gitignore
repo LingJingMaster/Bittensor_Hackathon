@@ -22,3 +22,8 @@ dist/
 build/
 node_modules/
 
+# Local IDE/agent configs
+.claude/
+.vscode/
+.idea/
+
