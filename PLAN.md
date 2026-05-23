@@ -37,7 +37,7 @@ Status values: `pending`, `in_progress`, `completed`, `blocked`.
 | Phase 2: Validator Pipeline | completed | Partner B: Validator/Demo | `uv run pytest tests/test_validator_pipeline.py` 17 passed | Implement modular scoring stages. |
 | Phase 3: JSON Storage | completed | Tina (Partner A) | `uv run pytest tests/test_json_store.py` 12 passed | Persist submissions and reports locally. |
 | Phase 4: Demo Assets | completed | Partner B: Validator/Demo | `.venv\Scripts\python.exe -m pytest -v --basetemp .pytest_tmp` 50 passed | Added good, bad, and near-duplicate sample assets with tests. |
-| Phase 5: FastAPI API | pending | Partner A: Platform/API | - | Expose health, validation, report, and sample endpoints. |
+| Phase 5: FastAPI API | completed | Partner A: Platform/API | `.venv\Scripts\python.exe -m pytest -v --basetemp .pytest_tmp` 57 passed | Exposed health, validation, report, and sample endpoints. |
 | Phase 6: Static Demo UI | pending | Partner B: Validator/Demo | - | Serve a simple demo page from FastAPI. |
 | Phase 7: Railway Deployment | pending | Partner A: Platform/API | - | Deploy the public demo to Railway. |
 | Phase 8: Upgrade Path | pending | Partner B: Validator/Demo | - | Document the path to frontend split, DB, model panel, and Bittensor SDK. |
@@ -380,3 +380,13 @@ Template:
 - Validation result: JSON formatting passed for all three sample assets; 50 tests passed after rebasing on Phase 3. Pytest reported one cache write warning because `.pytest_cache` was not writable in this local environment.
 - Cross-platform notes: Sample assets are plain UTF-8 JSON and load through `pathlib.Path` in tests. Current PowerShell PATH did not expose `uv`, so validation used the repository `.venv` Python interpreter. `--basetemp .pytest_tmp` keeps pytest temporary files inside the repo workspace on this Windows machine.
 - Next step: Phase 5 FastAPI API can expose these samples through `GET /api/demo/samples` and validate them through `POST /api/assets/validate`.
+
+### 2026-05-23 15:05 - Phase 5 completed
+
+- AI/Engineer: Codex
+- Files changed: apps/api/main.py, tests/test_api.py, PLAN.md
+- Validation command: `.venv\Scripts\python.exe -m pytest tests\test_api.py -v --basetemp .pytest_tmp`; `.venv\Scripts\python.exe -m pytest -v --basetemp .pytest_tmp`
+- Validation result: 7 API tests passed; 57 tests passed in the full suite. Pytest reported one cache write warning because `.pytest_cache` was not writable in this local environment.
+- Cross-platform notes: API uses `pathlib.Path` for project and sample paths. Tests inject `JsonStore(base_dir=tmp_path)` through `app.state.store` so they do not write to repository data folders.
+- API behavior notes for Phase 6: `GET /api/demo/samples` returns the three `AssetSubmission` sample objects; `POST /api/assets/validate` saves both the submission and report; `GET /api/reports` lists saved reports; `GET /api/reports/{asset_id}` returns 404 with a readable message when missing.
+- Next step: Phase 6 Static Demo UI can call relative API paths against this FastAPI app.
