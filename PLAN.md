@@ -32,8 +32,8 @@ Status values: `pending`, `in_progress`, `completed`, `blocked`.
 
 | Phase | Status | Owner | Validation | Notes |
 | --- | --- | --- | --- | --- |
-| Phase 0: Bootstrap | pending | Shared | - | Create Python project foundation with uv. |
-| Phase 1: Schemas | pending | Shared | - | Define the core submission and report contracts. Freeze before parallel work. |
+| Phase 0: Bootstrap | completed | Shared | `uv sync --extra dev && uv run pytest` 2 passed | Create Python project foundation with uv. |
+| Phase 1: Schemas | completed | Shared | `uv run pytest tests/test_schemas.py` 14 passed | Define the core submission and report contracts. Freeze before parallel work. |
 | Phase 2: Validator Pipeline | pending | Partner B: Validator/Demo | - | Implement modular scoring stages. |
 | Phase 3: JSON Storage | pending | Partner A: Platform/API | - | Persist submissions and reports locally. |
 | Phase 4: Demo Assets | pending | Partner B: Validator/Demo | - | Add good, bad, and near-duplicate sample assets. |
@@ -326,3 +326,21 @@ Template:
 - Validation result:
 - Next step:
 ```
+
+### 2026-05-23 - Phase 0 completed
+
+- AI/Engineer: LingJing (Claude)
+- Files changed: pyproject.toml, freshbench/__init__.py, freshbench/validator/__init__.py, freshbench/storage/__init__.py, apps/__init__.py, apps/api/__init__.py, tests/__init__.py, tests/test_smoke.py
+- Validation command: `uv sync --extra dev && uv run pytest -v`
+- Validation result: 2 passed (test_import_freshbench, test_import_apps)
+- Cross-platform notes: Python 3.13.5, no platform-specific deps, pathlib not yet needed
+- Next step: Phase 1 Schemas
+
+### 2026-05-23 - Phase 1 completed
+
+- AI/Engineer: LingJing (Claude)
+- Files changed: freshbench/schemas.py, tests/test_schemas.py
+- Validation command: `uv run pytest tests/test_schemas.py -v`
+- Validation result: 14 passed (valid construction, invalid rejection, JSON round-trip)
+- Cross-platform notes: Pure Pydantic, no platform deps
+- Next step: Phase 2 (LingJing) and Phase 3/4 (Tina) can start in parallel
