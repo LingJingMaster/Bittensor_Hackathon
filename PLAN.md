@@ -35,7 +35,7 @@ Status values: `pending`, `in_progress`, `completed`, `blocked`.
 | Phase 0: Bootstrap | completed | Shared | `uv sync --extra dev && uv run pytest` 2 passed | Create Python project foundation with uv. |
 | Phase 1: Schemas | completed | Shared | `uv run pytest tests/test_schemas.py` 14 passed | Define the core submission and report contracts. Freeze before parallel work. |
 | Phase 2: Validator Pipeline | completed | Partner B: Validator/Demo | `uv run pytest tests/test_validator_pipeline.py` 17 passed | Implement modular scoring stages. |
-| Phase 3: JSON Storage | pending | Partner A: Platform/API | - | Persist submissions and reports locally. |
+| Phase 3: JSON Storage | completed | Tina (Partner A) | `uv run pytest tests/test_json_store.py` 12 passed | Persist submissions and reports locally. |
 | Phase 4: Demo Assets | pending | Partner B: Validator/Demo | - | Add good, bad, and near-duplicate sample assets. |
 | Phase 5: FastAPI API | pending | Partner A: Platform/API | - | Expose health, validation, report, and sample endpoints. |
 | Phase 6: Static Demo UI | pending | Partner B: Validator/Demo | - | Serve a simple demo page from FastAPI. |
@@ -354,3 +354,21 @@ Template:
 - Cross-platform notes: No platform deps, pure Python, deterministic for demo samples
 - Import path for Tina: `from freshbench.validator.pipeline import validate_asset`
 - Next step: Phase 6 (Static Demo UI) after Tina completes Phase 5 (API)
+
+### 2026-05-23 - Phase 3 completed
+
+- AI/Engineer: Tina (Claude)
+- Files changed: freshbench/storage/json_store.py, tests/test_json_store.py
+- Validation command: `uv run pytest tests/test_json_store.py -v` then full suite `uv run pytest -v`
+- Validation result: 12 passed for Phase 3 tests; 45 passed in full suite (no regressions)
+- Cross-platform notes: Uses `pathlib.Path` throughout, UTF-8 encoding on read/write, project root resolved via `Path(__file__).resolve().parents[2]`. No platform deps.
+- Import path for LingJing:
+  - Module-level helpers: `from freshbench.storage.json_store import save_submission, save_report, load_report, list_reports` (writes under `data/submissions/` and `data/reports/`).
+  - Test-friendly class: `from freshbench.storage.json_store import JsonStore`; instantiate with `JsonStore(base_dir=tmp_path)` to isolate tests.
+- Storage layout: `data/submissions/{task_id}.json`, `data/reports/{asset_id}.json` (both already gitignored).
+- Behavior notes for API layer (Phase 5):
+  - `save_submission` / `save_report` return the absolute path string of the written file and auto-create the parent dir.
+  - `load_report(asset_id)` returns `ScoringReport | None`; the API can map `None` to a 404.
+  - `list_reports()` returns `list[ScoringReport]` sorted by filename; empty store (including missing dir) returns `[]`.
+  - Stage order is preserved across save/load round-trip.
+- Next step: Phase 4 (Demo Assets) — author good/bad/near-duplicate sample assets under `data/samples/`.
