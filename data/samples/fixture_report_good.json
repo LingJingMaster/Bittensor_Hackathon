@@ -1,0 +1,82 @@
+{
+  "asset_id": "freshbench_doc_good_001",
+  "final_score": 0.511,
+  "state": "active",
+  "stages": [
+    {
+      "stage": "schema_check",
+      "score": 1.0,
+      "passed": true,
+      "reason": "All required fields present and non-empty.",
+      "evidence": {
+        "missing_fields": [],
+        "fields_checked": 3
+      },
+      "cost_ms": 0.0012499949662014842
+    },
+    {
+      "stage": "ground_truth_check",
+      "score": 1.0,
+      "passed": true,
+      "reason": "Ground truth is valid and verifiable.",
+      "evidence": {
+        "field_count": 4,
+        "non_empty_fields": 4,
+        "completeness": 1.0
+      },
+      "cost_ms": 0.008333998266607523
+    },
+    {
+      "stage": "novelty_check",
+      "score": 0.7,
+      "passed": true,
+      "reason": "High novelty. No significant similarity to known benchmarks or history.",
+      "evidence": {
+        "prompt_hash": "dd37310b3494da5e",
+        "exact_duplicate": false,
+        "max_benchmark_similarity": 0.5714285714285714,
+        "max_history_similarity": 0.0,
+        "anti_contamination_length": 97,
+        "novelty_score": 0.7
+      },
+      "cost_ms": 0.41512498864904046
+    },
+    {
+      "stage": "model_panel_calibration",
+      "score": 0.73,
+      "passed": true,
+      "reason": "Strong discrimination: clear capability gradient across model tiers.",
+      "evidence": {
+        "panel_results": [
+          {
+            "model": "weak_baseline",
+            "tier": "weak",
+            "success_rate": 0.13
+          },
+          {
+            "model": "mid_open_source",
+            "tier": "mid",
+            "success_rate": 0.37
+          },
+          {
+            "model": "strong_model",
+            "tier": "strong",
+            "success_rate": 0.61
+          },
+          {
+            "model": "rule_extractor",
+            "tier": "baseline",
+            "success_rate": 0.06
+          }
+        ],
+        "discrimination_score": 0.73
+      },
+      "cost_ms": 0.014165998436510563
+    }
+  ],
+  "reward_hint": {
+    "submission_reward": 0.1,
+    "usage_reward_weight": 0.511
+  },
+  "created_at": "2026-05-23T06:19:00.438528Z"
+}

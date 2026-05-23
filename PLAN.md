@@ -34,7 +34,7 @@ Status values: `pending`, `in_progress`, `completed`, `blocked`.
 | --- | --- | --- | --- | --- |
 | Phase 0: Bootstrap | completed | Shared | `uv sync --extra dev && uv run pytest` 2 passed | Create Python project foundation with uv. |
 | Phase 1: Schemas | completed | Shared | `uv run pytest tests/test_schemas.py` 14 passed | Define the core submission and report contracts. Freeze before parallel work. |
-| Phase 2: Validator Pipeline | pending | Partner B: Validator/Demo | - | Implement modular scoring stages. |
+| Phase 2: Validator Pipeline | completed | Partner B: Validator/Demo | `uv run pytest tests/test_validator_pipeline.py` 17 passed | Implement modular scoring stages. |
 | Phase 3: JSON Storage | pending | Partner A: Platform/API | - | Persist submissions and reports locally. |
 | Phase 4: Demo Assets | pending | Partner B: Validator/Demo | - | Add good, bad, and near-duplicate sample assets. |
 | Phase 5: FastAPI API | pending | Partner A: Platform/API | - | Expose health, validation, report, and sample endpoints. |
@@ -344,3 +344,13 @@ Template:
 - Validation result: 14 passed (valid construction, invalid rejection, JSON round-trip)
 - Cross-platform notes: Pure Pydantic, no platform deps
 - Next step: Phase 2 (LingJing) and Phase 3/4 (Tina) can start in parallel
+
+### 2026-05-23 - Phase 2 completed
+
+- AI/Engineer: LingJing (Claude)
+- Files changed: freshbench/validator/pipeline.py, freshbench/validator/scoring.py, freshbench/validator/novelty.py, freshbench/validator/model_panel.py, tests/test_validator_pipeline.py
+- Validation command: `uv run pytest tests/test_validator_pipeline.py -v`
+- Validation result: 17 passed (good->active, bad->rejected, near-dup low novelty, exact-dup rejected, early exit, stage structure, report completeness)
+- Cross-platform notes: No platform deps, pure Python, deterministic for demo samples
+- Import path for Tina: `from freshbench.validator.pipeline import validate_asset`
+- Next step: Phase 6 (Static Demo UI) after Tina completes Phase 5 (API)

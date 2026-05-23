@@ -1,0 +1,82 @@
+{
+  "asset_id": "freshbench_doc_dup_001",
+  "final_score": 0.1221,
+  "state": "rejected",
+  "stages": [
+    {
+      "stage": "schema_check",
+      "score": 1.0,
+      "passed": true,
+      "reason": "All required fields present and non-empty.",
+      "evidence": {
+        "missing_fields": [],
+        "fields_checked": 3
+      },
+      "cost_ms": 0.00037500285543501377
+    },
+    {
+      "stage": "ground_truth_check",
+      "score": 1.0,
+      "passed": true,
+      "reason": "Ground truth is valid and verifiable.",
+      "evidence": {
+        "field_count": 1,
+        "non_empty_fields": 1,
+        "completeness": 1.0
+      },
+      "cost_ms": 0.0046670029405504465
+    },
+    {
+      "stage": "novelty_check",
+      "score": 0.15,
+      "passed": false,
+      "reason": "Too similar to existing benchmarks or previous submissions.",
+      "evidence": {
+        "prompt_hash": "fba453a3923a07f0",
+        "exact_duplicate": false,
+        "max_benchmark_similarity": 0.918918918918919,
+        "max_history_similarity": 0.5384615384615384,
+        "anti_contamination_length": 46,
+        "novelty_score": 0.15000000000000002
+      },
+      "cost_ms": 0.29054199694655836
+    },
+    {
+      "stage": "model_panel_calibration",
+      "score": 0.814,
+      "passed": true,
+      "reason": "Strong discrimination: clear capability gradient across model tiers.",
+      "evidence": {
+        "panel_results": [
+          {
+            "model": "weak_baseline",
+            "tier": "weak",
+            "success_rate": 0.15
+          },
+          {
+            "model": "mid_open_source",
+            "tier": "mid",
+            "success_rate": 0.45
+          },
+          {
+            "model": "strong_model",
+            "tier": "strong",
+            "success_rate": 0.75
+          },
+          {
+            "model": "rule_extractor",
+            "tier": "baseline",
+            "success_rate": 0.06
+          }
+        ],
+        "discrimination_score": 0.814
+      },
+      "cost_ms": 0.009542010957375169
+    }
+  ],
+  "reward_hint": {
+    "submission_reward": 0.0,
+    "usage_reward_weight": 0.0
+  },
+  "created_at": "2026-05-23T06:19:00.439486Z"
+}
