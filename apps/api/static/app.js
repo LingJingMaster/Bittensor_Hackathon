@@ -17,10 +17,13 @@ async function init() {
 }
 
 function useFallbackSamples() {
+  // Names must match the file stems under data/samples/ so that
+  // GET /api/demo/validate/{sample_name} resolves when the samples
+  // listing endpoint is unavailable.
   samples = [
-    { name: "good", label: "Good Asset", task_id: "freshbench_doc_good_001" },
-    { name: "bad", label: "Bad Asset", task_id: "freshbench_doc_bad_001" },
-    { name: "near_duplicate", label: "Near Duplicate", task_id: "freshbench_doc_dup_001" },
+    { name: "good_document", label: "Good Asset" },
+    { name: "bad_ambiguous", label: "Bad Asset" },
+    { name: "near_duplicate", label: "Near Duplicate" },
   ];
   renderSampleButtons(samples);
 }

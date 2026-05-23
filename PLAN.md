@@ -278,7 +278,8 @@ The v1 API contract is fixed for the single-service demo and later frontend spli
 | `POST` | `/api/assets/validate` | Validate one `AssetSubmission` and return `ScoringReport`. |
 | `GET` | `/api/reports` | List saved reports. |
 | `GET` | `/api/reports/{asset_id}` | Load one saved report. |
-| `GET` | `/api/demo/samples` | List available demo sample assets. |
+| `GET` | `/api/demo/samples` | List demo sample assets as `[{name, label, submission: AssetSubmission}]` wrappers for UI consumption. |
+| `GET` | `/api/demo/validate/{sample_name}` | Convenience endpoint: load a bundled sample by stem (`good_document`, `bad_ambiguous`, `near_duplicate`) and return its `ScoringReport`. Demo-only. |
 
 ## AI Collaboration Requirement
 
