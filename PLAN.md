@@ -38,7 +38,7 @@ Status values: `pending`, `in_progress`, `completed`, `blocked`.
 | Phase 3: JSON Storage | completed | Tina (Partner A) | `uv run pytest tests/test_json_store.py` 12 passed | Persist submissions and reports locally. |
 | Phase 4: Demo Assets | completed | Partner B: Validator/Demo | `.venv\Scripts\python.exe -m pytest -v --basetemp .pytest_tmp` 50 passed | Added good, bad, and near-duplicate sample assets with tests. |
 | Phase 5: FastAPI API | completed | Partner A: Platform/API | `.venv\Scripts\python.exe -m pytest -v --basetemp .pytest_tmp` 57 passed | Exposed health, validation, report, and sample endpoints. |
-| Phase 6: Static Demo UI | pending | Partner B: Validator/Demo | - | Serve a simple demo page from FastAPI. |
+| Phase 6: Static Demo UI | completed | Partner B: Validator/Demo | `uv run pytest -v` 57 passed + manual browser check | Integrated static demo UI with Phase 5 API. |
 | Phase 7: Railway Deployment | pending | Partner A: Platform/API | - | Deploy the public demo to Railway. |
 | Phase 8: Upgrade Path | pending | Partner B: Validator/Demo | - | Document the path to frontend split, DB, model panel, and Bittensor SDK. |
 
@@ -390,3 +390,13 @@ Template:
 - Cross-platform notes: API uses `pathlib.Path` for project and sample paths. Tests inject `JsonStore(base_dir=tmp_path)` through `app.state.store` so they do not write to repository data folders.
 - API behavior notes for Phase 6: `GET /api/demo/samples` returns the three `AssetSubmission` sample objects; `POST /api/assets/validate` saves both the submission and report; `GET /api/reports` lists saved reports; `GET /api/reports/{asset_id}` returns 404 with a readable message when missing.
 - Next step: Phase 6 Static Demo UI can call relative API paths against this FastAPI app.
+
+### 2026-05-23 - Phase 6 completed
+
+- AI/Engineer: LingJing (Claude)
+- Files changed: apps/api/main.py (merged with Phase 5 API), apps/api/static/index.html, apps/api/static/styles.css, apps/api/static/app.js, tests/test_api.py (updated demo samples test for new response shape), .claude/launch.json, PLAN.md
+- Validation command: `uv run pytest -v`
+- Validation result: 57 passed, no regressions. All 3 demo samples (good/bad/near-duplicate) produce visually distinct results in browser. Good=active (green), Bad=rejected (red), Near-dup=verified (blue). Pipeline stages expand to show reason+evidence.
+- Integration notes: Merged Phase 6 static serving into Tina's Phase 5 API — removed inline DEMO_SAMPLES, now loads from `data/samples/*.json` files. Added `GET /api/demo/validate/{sample_name}` endpoint. `GET /api/demo/samples` now returns `{name, label, submission}` wrapper objects for UI consumption. Updated `test_demo_samples_endpoint_lists_assets` to match new shape.
+- Cross-platform notes: Static HTML/CSS/JS, no build tooling, relative API paths only.
+- Next step: Phase 7 (Railway Deployment) and Phase 8 (Upgrade Path).
