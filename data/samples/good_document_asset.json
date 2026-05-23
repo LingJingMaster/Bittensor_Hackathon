@@ -1,0 +1,26 @@
+{
+  "task_id": "sample_good_grant_letter_001",
+  "task_type": "document_extraction",
+  "prompt": "From the following research grant award letter, extract the awarding institution, principal investigator name, grant identifier, award amount in USD (digits only, two decimals), and the project start date in ISO format. Return them as a structured object.",
+  "context": "AWARD NOTICE - Cascadia Marine Research Trust\nReference: CMRT-2026-G417-A\nPrincipal Investigator: Dr. Hana Okonkwo-Bennett\nInstitution: Coastal University of Patagonia\nProject Title: Deep-sea methane seep microbial diversity in the Drake Passage\nApproved Award (USD): $487,250.00\nProject Start: 2026-07-01\nProject End: 2028-06-30\nReporting cadence: quarterly\nContact: grants@cmrt.example.org",
+  "ground_truth": {
+    "expected_output": {
+      "awarding_institution": "Cascadia Marine Research Trust",
+      "principal_investigator": "Dr. Hana Okonkwo-Bennett",
+      "grant_id": "CMRT-2026-G417-A",
+      "award_amount_usd": "487250.00",
+      "project_start": "2026-07-01"
+    },
+    "verification_method": "exact_match",
+    "scoring_script": null
+  },
+  "skill_tags": [
+    "multi_field_extraction",
+    "schema_following",
+    "named_entity_recognition",
+    "numeric_parsing"
+  ],
+  "difficulty_estimate": 0.55,
+  "source_type": "synthetic",
+  "anti_contamination_evidence": "Generated from a custom research-grant award-letter template with randomized institution names, investigator names, grant IDs, monetary amounts, and project dates. The fictional 'Cascadia Marine Research Trust' and 'Coastal University of Patagonia' do not appear in any real grant database or public benchmark. Field names and structure differ from FUNSD, SROIE, DocVQA, and other published document-extraction datasets. The combination of a grant-award schema with currency normalization and ISO date conversion is not present in known evaluation benchmarks."
+}

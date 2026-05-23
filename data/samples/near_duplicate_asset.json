@@ -1,0 +1,20 @@
+{
+  "task_id": "sample_near_duplicate_invoice_001",
+  "task_type": "document_extraction",
+  "prompt": "Extract the total amount from the following invoice document and return it as JSON.",
+  "context": "Invoice #DUP-7\nVendor: Anywhere LLC\nLine items: $100.00, $250.00\nTax: $35.00\nTotal Amount: $385.00",
+  "ground_truth": {
+    "expected_output": {
+      "total_amount": "385.00"
+    },
+    "verification_method": "exact_match",
+    "scoring_script": null
+  },
+  "skill_tags": [
+    "extraction",
+    "numeric_parsing"
+  ],
+  "difficulty_estimate": 0.3,
+  "source_type": "transformed_real_task",
+  "anti_contamination_evidence": "Adapted from a generic invoice-extraction template. The prompt phrasing intentionally mirrors a well-known invoice-extraction benchmark style, used here as a demonstration of how the novelty gate penalizes prompts that resemble widely-studied invoice tasks. The numeric values and vendor name are randomized."
+}
