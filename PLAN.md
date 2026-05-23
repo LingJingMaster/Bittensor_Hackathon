@@ -36,7 +36,7 @@ Status values: `pending`, `in_progress`, `completed`, `blocked`.
 | Phase 1: Schemas | completed | Shared | `uv run pytest tests/test_schemas.py` 14 passed | Define the core submission and report contracts. Freeze before parallel work. |
 | Phase 2: Validator Pipeline | completed | Partner B: Validator/Demo | `uv run pytest tests/test_validator_pipeline.py` 17 passed | Implement modular scoring stages. |
 | Phase 3: JSON Storage | completed | Tina (Partner A) | `uv run pytest tests/test_json_store.py` 12 passed | Persist submissions and reports locally. |
-| Phase 4: Demo Assets | pending | Partner B: Validator/Demo | - | Add good, bad, and near-duplicate sample assets. |
+| Phase 4: Demo Assets | completed | Partner B: Validator/Demo | `.venv\Scripts\python.exe -m pytest -v --basetemp .pytest_tmp` 50 passed | Added good, bad, and near-duplicate sample assets with tests. |
 | Phase 5: FastAPI API | pending | Partner A: Platform/API | - | Expose health, validation, report, and sample endpoints. |
 | Phase 6: Static Demo UI | pending | Partner B: Validator/Demo | - | Serve a simple demo page from FastAPI. |
 | Phase 7: Railway Deployment | pending | Partner A: Platform/API | - | Deploy the public demo to Railway. |
@@ -372,3 +372,11 @@ Template:
   - `list_reports()` returns `list[ScoringReport]` sorted by filename; empty store (including missing dir) returns `[]`.
   - Stage order is preserved across save/load round-trip.
 - Next step: Phase 4 (Demo Assets) — author good/bad/near-duplicate sample assets under `data/samples/`.
+### 2026-05-23 14:42 - Phase 4 completed
+
+- AI/Engineer: Codex
+- Files changed: data/samples/good_document_asset.json, data/samples/bad_ambiguous_asset.json, data/samples/near_duplicate_asset.json, tests/test_demo_samples.py, PLAN.md
+- Validation command: `.venv\Scripts\python.exe -m json.tool data\samples\good_document_asset.json`; `.venv\Scripts\python.exe -m json.tool data\samples\bad_ambiguous_asset.json`; `.venv\Scripts\python.exe -m json.tool data\samples\near_duplicate_asset.json`; `.venv\Scripts\python.exe -m pytest -v --basetemp .pytest_tmp`
+- Validation result: JSON formatting passed for all three sample assets; 50 tests passed after rebasing on Phase 3. Pytest reported one cache write warning because `.pytest_cache` was not writable in this local environment.
+- Cross-platform notes: Sample assets are plain UTF-8 JSON and load through `pathlib.Path` in tests. Current PowerShell PATH did not expose `uv`, so validation used the repository `.venv` Python interpreter. `--basetemp .pytest_tmp` keeps pytest temporary files inside the repo workspace on this Windows machine.
+- Next step: Phase 5 FastAPI API can expose these samples through `GET /api/demo/samples` and validate them through `POST /api/assets/validate`.

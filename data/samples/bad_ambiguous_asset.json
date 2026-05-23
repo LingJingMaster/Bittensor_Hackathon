@@ -1,0 +1,17 @@
+{
+  "task_id": "sample_bad_ambiguous_001",
+  "task_type": "document_extraction",
+  "prompt": "Look at this and tell me what you see.",
+  "context": "Some text here.",
+  "ground_truth": {
+    "expected_output": {},
+    "verification_method": "exact_match",
+    "scoring_script": null
+  },
+  "skill_tags": [
+    "extraction"
+  ],
+  "difficulty_estimate": 0.1,
+  "source_type": "synthetic",
+  "anti_contamination_evidence": "n/a"
+}
