@@ -4,7 +4,7 @@ import hashlib
 import time
 from typing import Any
 
-from freshbench.schemas import AssetSubmission, TaskType, ValidationStageResult
+from freshbench.schemas import AssetSubmission, ValidationStageResult
 
 
 def run_model_panel_calibration(submission: AssetSubmission) -> ValidationStageResult:
