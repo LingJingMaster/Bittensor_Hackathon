@@ -287,6 +287,7 @@ Every AI working on this repo must follow this protocol.
 Before starting work:
 
 - Read this file.
+- Read `RULES.md`.
 - Pick the first `pending` or `blocked` phase that can be advanced.
 - Mark it `in_progress`.
 - Keep ownership and notes current.

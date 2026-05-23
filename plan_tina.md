@@ -2,6 +2,8 @@
 
 This file is Tina's personal execution plan. The shared source of truth is still `PLAN.md`.
 
+Read `RULES.md` before starting implementation. It contains the cross-platform requirements for ARM macOS, x86 Windows, and Railway.
+
 Important collaboration reminder:
 
 > Do not optimize only for your own tasks. Every phase you complete must leave LingJing able to continue without guessing your intent. Keep storage paths, API behavior, sample assets, mock reports, and validation evidence clear enough for LingJing to consume directly.
@@ -301,4 +303,3 @@ Validation:
 - Do not make deployment require unavailable local files.
 - Do not mark a phase completed without validation output.
 - Always leave enough notes for LingJing to continue if you are unavailable.
-
