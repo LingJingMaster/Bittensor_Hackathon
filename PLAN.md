@@ -32,15 +32,95 @@ Status values: `pending`, `in_progress`, `completed`, `blocked`.
 
 | Phase | Status | Owner | Validation | Notes |
 | --- | --- | --- | --- | --- |
-| Phase 0: Bootstrap | pending | - | - | Create Python project foundation with uv. |
-| Phase 1: Schemas | pending | - | - | Define the core submission and report contracts. |
-| Phase 2: Validator Pipeline | pending | - | - | Implement modular scoring stages. |
-| Phase 3: JSON Storage | pending | - | - | Persist submissions and reports locally. |
-| Phase 4: Demo Assets | pending | - | - | Add good, bad, and near-duplicate sample assets. |
-| Phase 5: FastAPI API | pending | - | - | Expose health, validation, report, and sample endpoints. |
-| Phase 6: Static Demo UI | pending | - | - | Serve a simple demo page from FastAPI. |
-| Phase 7: Railway Deployment | pending | - | - | Deploy the public demo to Railway. |
-| Phase 8: Upgrade Path | pending | - | - | Document the path to frontend split, DB, model panel, and Bittensor SDK. |
+| Phase 0: Bootstrap | pending | Shared | - | Create Python project foundation with uv. |
+| Phase 1: Schemas | pending | Shared | - | Define the core submission and report contracts. Freeze before parallel work. |
+| Phase 2: Validator Pipeline | pending | Partner B: Validator/Demo | - | Implement modular scoring stages. |
+| Phase 3: JSON Storage | pending | Partner A: Platform/API | - | Persist submissions and reports locally. |
+| Phase 4: Demo Assets | pending | Partner B: Validator/Demo | - | Add good, bad, and near-duplicate sample assets. |
+| Phase 5: FastAPI API | pending | Partner A: Platform/API | - | Expose health, validation, report, and sample endpoints. |
+| Phase 6: Static Demo UI | pending | Partner B: Validator/Demo | - | Serve a simple demo page from FastAPI. |
+| Phase 7: Railway Deployment | pending | Partner A: Platform/API | - | Deploy the public demo to Railway. |
+| Phase 8: Upgrade Path | pending | Partner B: Validator/Demo | - | Document the path to frontend split, DB, model panel, and Bittensor SDK. |
+
+## Two-Person Work Split
+
+Phase 0 and Phase 1 are shared contract phases. Do not start independent implementation until both are completed and validated.
+
+After Phase 1, split work into two isolated workstreams.
+
+### Partner A: Platform/API Workstream
+
+Primary ownership:
+
+- Phase 3: JSON Storage
+- Phase 5: FastAPI API
+- Phase 7: Railway Deployment
+
+Responsibilities:
+
+- Keep API endpoints stable.
+- Keep file storage behavior predictable.
+- Keep FastAPI routes thin and delegate business logic to `freshbench/`.
+- Keep Railway deployability intact.
+- Provide fixture-backed API behavior if Partner B's validator pipeline is not ready yet.
+
+Partner A must not redesign validator scoring or schema fields without coordinating in Phase 1 contract notes.
+
+### Partner B: Validator/Demo Workstream
+
+Primary ownership:
+
+- Phase 2: Validator Pipeline
+- Phase 4: Demo Assets
+- Phase 6: Static Demo UI
+- Phase 8: Upgrade Path
+
+Responsibilities:
+
+- Keep all scoring logic inside `freshbench/validator/`.
+- Make good, bad, and near-duplicate behavior visibly different.
+- Build UI against the stable API contract and sample report fixtures.
+- Use mock/sample reports if Partner A's API is not ready yet.
+- Document upgrade path without changing v1 API contract.
+
+Partner B must not change API endpoint names, response shapes, or storage paths without coordinating in Phase 1 contract notes.
+
+## Integration Rules
+
+Use these contracts to prevent one workstream from blocking or breaking the other.
+
+Shared contracts after Phase 1:
+
+- `AssetSubmission` schema
+- `ScoringReport` schema
+- `ValidationStageResult` schema
+- sample asset JSON shape
+- sample report JSON shape
+- API paths listed in the API Contract section
+
+Parallel work rules:
+
+- Partner A can build API and storage using fixture reports before the real validator is ready.
+- Partner B can build validator and UI using local sample JSON before the API is ready.
+- Each workstream must keep its own tests passing before integration.
+- Integration happens only through the shared schemas and API contract.
+- If a contract change is unavoidable, update `PLAN.md`, implementation guide, tests, and both partners' notes before coding against the new contract.
+
+Merge order:
+
+1. Complete Phase 0 and Phase 1 together.
+2. Partner A starts Phase 3 while Partner B starts Phase 2.
+3. Partner B adds Phase 4 sample assets once schemas are stable.
+4. Partner A builds Phase 5 API against schemas and sample reports.
+5. Partner B builds Phase 6 UI against API contract and sample data.
+6. Partner A deploys Phase 7 after Phases 2-6 are validated locally.
+7. Partner B completes Phase 8 upgrade documentation after deployment constraints are known.
+
+Fallback rule:
+
+- If Partner A is blocked, Partner B continues with local files and mock reports.
+- If Partner B is blocked, Partner A continues with fixture reports and API/storage/deploy wiring.
+- No phase may be marked completed solely because the other workstream is blocked.
 
 ## Phase Details
 
@@ -245,4 +325,3 @@ Template:
 - Validation result:
 - Next step:
 ```
-
