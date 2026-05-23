@@ -8,10 +8,12 @@
 
 | 文档 | 用途 | 阅读顺序 |
 | --- | --- | --- |
-| [docs/freshbench-proposal.md](docs/freshbench-proposal.md) | FreshBench 子网方案正文：问题、商品、角色、验证、奖励、反作弊、demo、roadmap | 1 |
-| [docs/technical-stack.md](docs/technical-stack.md) | Hackathon 原型和后续 testnet/production 的技术栈建议 | 2 |
-| [docs/official-resources.md](docs/official-resources.md) | 官方入口、文档、GitHub、TaoStats 和调研时应看的页面 | 3 |
-| [docs/hackathon-idea-references.md](docs/hackathon-idea-references.md) | 往届获奖 proposal 的模式拆解 | 4 |
+| [PLAN.md](PLAN.md) | FreshBench 实施阶段、协作规则和实时进度看板 | 1 |
+| [docs/freshbench-implementation-guide.md](docs/freshbench-implementation-guide.md) | 单服务 Demo 的详细工程实施手册：模块、API、验证、Railway 部署 | 2 |
+| [docs/freshbench-proposal.md](docs/freshbench-proposal.md) | FreshBench 子网方案正文：问题、商品、角色、验证、奖励、反作弊、demo、roadmap | 3 |
+| [docs/technical-stack.md](docs/technical-stack.md) | Hackathon 原型和后续 testnet/production 的技术栈建议 | 4 |
+| [docs/official-resources.md](docs/official-resources.md) | 官方入口、文档、GitHub、TaoStats 和调研时应看的页面 | 5 |
+| [docs/hackathon-idea-references.md](docs/hackathon-idea-references.md) | 往届获奖 proposal 的模式拆解 | 6 |
 
 ## 当前方向
 
