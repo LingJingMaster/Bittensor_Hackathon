@@ -9,13 +9,14 @@
 | 文档 | 用途 | 阅读顺序 |
 | --- | --- | --- |
 | [PLAN.md](PLAN.md) | FreshBench 实施阶段、协作规则和实时进度看板 | 1 |
-| [plan_lingjing.md](plan_lingjing.md) | LingJing 的个人执行计划：validator pipeline、UI、协作边界 | 2 |
-| [plan_tina.md](plan_tina.md) | Tina 的个人执行计划：storage、demo assets、API、Railway 部署 | 3 |
-| [docs/freshbench-implementation-guide.md](docs/freshbench-implementation-guide.md) | 单服务 Demo 的详细工程实施手册：模块、API、验证、Railway 部署 | 4 |
-| [docs/freshbench-proposal.md](docs/freshbench-proposal.md) | FreshBench 子网方案正文：问题、商品、角色、验证、奖励、反作弊、demo、roadmap | 5 |
-| [docs/technical-stack.md](docs/technical-stack.md) | Hackathon 原型和后续 testnet/production 的技术栈建议 | 6 |
-| [docs/official-resources.md](docs/official-resources.md) | 官方入口、文档、GitHub、TaoStats 和调研时应看的页面 | 7 |
-| [docs/hackathon-idea-references.md](docs/hackathon-idea-references.md) | 往届获奖 proposal 的模式拆解 | 8 |
+| [RULES.md](RULES.md) | ARM macOS + x86 Windows + Railway 的跨平台协作规则 | 2 |
+| [plan_lingjing.md](plan_lingjing.md) | LingJing 的个人执行计划：validator pipeline、UI、协作边界 | 3 |
+| [plan_tina.md](plan_tina.md) | Tina 的个人执行计划：storage、demo assets、API、Railway 部署 | 4 |
+| [docs/freshbench-implementation-guide.md](docs/freshbench-implementation-guide.md) | 单服务 Demo 的详细工程实施手册：模块、API、验证、Railway 部署 | 5 |
+| [docs/freshbench-proposal.md](docs/freshbench-proposal.md) | FreshBench 子网方案正文：问题、商品、角色、验证、奖励、反作弊、demo、roadmap | 6 |
+| [docs/technical-stack.md](docs/technical-stack.md) | Hackathon 原型和后续 testnet/production 的技术栈建议 | 7 |
+| [docs/official-resources.md](docs/official-resources.md) | 官方入口、文档、GitHub、TaoStats 和调研时应看的页面 | 8 |
+| [docs/hackathon-idea-references.md](docs/hackathon-idea-references.md) | 往届获奖 proposal 的模式拆解 | 9 |
 
 ## 当前方向
 
